@@ -1,38 +1,389 @@
-<div class="sidebar">
-    <div class="logo">Your Logo/Name</div>
-    <nav>
-        <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#about">About Me</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-    </nav>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rojin Maharjan - Portfolio</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Courier New', monospace;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+            background-color: #fff;
+            color: #333;
+        }
+        
+        /* Sidebar Styles */
+        .sidebar {
+            width: 250px;
+            background-color: #000;
+            color: #0f0;
+            padding: 30px 20px;
+            height: 100vh;
+            position: fixed;
+            border-right: 1px solid #0f0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #0f0;
+        }
+        
+        nav ul {
+            list-style: none;
+        }
+        
+        nav li {
+            margin-bottom: 15px;
+        }
+        
+        nav a {
+            color: #0f0;
+            text-decoration: none;
+            font-size: 18px;
+            transition: all 0.3s;
+            display: block;
+            padding: 5px 0;
+        }
+        
+        nav a:hover {
+            text-shadow: 0 0 5px #0f0;
+            padding-left: 10px;
+        }
+        
+        /* Main Content Styles */
+        .main-content {
+            flex: 1;
+            margin-left: 250px;
+            overflow-y: auto;
+            height: 100vh;
+            padding: 0;
+        }
+        
+        section {
+            min-height: 100vh;
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        /* Terminal Box */
+        .terminal-box {
+            background-color: #000;
+            color: #0f0;
+            padding: 30px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+            max-width: 700px;
+            margin: 0 auto;
+            border: 1px solid #0f0;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+        }
+        
+        .prompt {
+            color: #0f0;
+            margin-right: 10px;
+        }
+        
+        .typewriter {
+            overflow: hidden;
+            border-right: 0.15em solid #0f0;
+            white-space: nowrap;
+            margin: 0;
+            letter-spacing: 0.15em;
+            animation: 
+                typing 3.5s steps(40, end),
+                blink-caret 0.75s step-end infinite;
+        }
+        
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #0f0; }
+        }
+        
+        /* Section Headings */
+        h2 {
+            font-size: 32px;
+            margin-bottom: 30px;
+            color: #000;
+            position: relative;
+            display: inline-block;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #0f0;
+        }
+        
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .project-card {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            transition: all 0.3s;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            border-color: #0f0;
+        }
+        
+        /* Skills Section */
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .skill-category {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .skill-item {
+            margin-bottom: 15px;
+        }
+        
+        .skill-name {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+        
+        .skill-bar {
+            height: 10px;
+            background-color: #eee;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .skill-progress {
+            height: 100%;
+            background-color: #0f0;
+            border-radius: 5px;
+        }
+        
+        /* Contact Section */
+        .contact-form {
+            max-width: 600px;
+            margin-top: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        textarea {
+            height: 150px;
+        }
+        
+        button {
+            background-color: #000;
+            color: #0f0;
+            border: 1px solid #0f0;
+            padding: 10px 20px;
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        button:hover {
+            background-color: #0f0;
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo">ROJIN MAHARJAN</div>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#about">About Me</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </div>
 
-<div class="main-content">
-    <section id="home" class="hero">
-        <div class="terminal-box">
-            <pre class="typewriter">
+    <div class="main-content">
+        <section id="home" class="hero">
+            <div class="terminal-box">
+                <pre class="typewriter">
 <span class="prompt">$</span> Hello, my name is Rojin Maharjan.
 <span class="prompt">$</span> Welcome to my portfolio.
-            </pre>
-        </div>
-    </section>
-    
-    <section id="projects">
-        <h2>My Projects</h2>
-        <!-- Project cards go here -->
-    </section>
-    
-    <section id="skills">
-        <h2>Skills & Certifications</h2>
-        <!-- Skills list goes here -->
-    </section>
-    
-    <section id="contact">
-        <h2>Contact Me</h2>
-        <!-- Contact form/info goes here -->
-    </section>
-</div>
+<span class="prompt">$</span> I'm a passionate developer...
+<span class="prompt">$</span> Scroll down to see my work.
+                </pre>
+            </div>
+        </section>
+        
+        <section id="projects">
+            <h2>My Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h3>Project 1</h3>
+                    <p>Description of project 1 goes here.</p>
+                </div>
+                <div class="project-card">
+                    <h3>Project 2</h3>
+                    <p>Description of project 2 goes here.</p>
+                </div>
+                <div class="project-card">
+                    <h3>Project 3</h3>
+                    <p>Description of project 3 goes here.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="skills">
+            <h2>Skills & Certifications</h2>
+            <div class="skills-container">
+                <div class="skill-category">
+                    <h3>Programming</h3>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>JavaScript</span>
+                            <span>90%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 90%;"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Python</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 85%;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Web Development</h3>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>HTML/CSS</span>
+                            <span>95%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 95%;"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>React</span>
+                            <span>80%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 80%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="about">
+            <h2>About Me</h2>
+            <p>I'm Rojin Maharjan, a passionate developer with experience in web development and programming. I love creating efficient, scalable solutions to real-world problems.</p>
+            <p>When I'm not coding, you can find me exploring new technologies, contributing to open source, or working on personal projects.</p>
+        </section>
+        
+        <section id="contact">
+            <h2>Contact Me</h2>
+            <div class="contact-form">
+                <div class="form-group">
+                    <input type="text" placeholder="Your Name">
+                </div>
+                <div class="form-group">
+                    <input type="email" placeholder="Your Email">
+                </div>
+                <div class="form-group">
+                    <textarea placeholder="Your Message"></textarea>
+                </div>
+                <button type="submit">Send Message</button>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Smooth scrolling for navigation
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Terminal-like typing effect
+        const terminalText = [
+            "Hello, my name is Rojin Maharjan.",
+            "Welcome to my portfolio.",
+            "I'm a passionate developer...",
+            "Scroll down to see my work."
+        ];
+        
+        let currentLine = 0;
+        const terminalElement = document.querySelector('.terminal-box pre');
+        
+        function typeWriter() {
+            if (currentLine < terminalText.length) {
+                const typedText = terminalText.slice(0, currentLine + 1).map(line => `$ ${line}`).join('\n');
+                terminalElement.textContent = typedText;
+                currentLine++;
+                setTimeout(typeWriter, 1500);
+            }
+        }
+        
+        // Start the typing effect after a delay
+        setTimeout(typeWriter, 1000);
+    </script>
+</body>
+</html>
