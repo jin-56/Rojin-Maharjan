@@ -7,6 +7,13 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+
+  <!-- Intro Screen -->
+  <div class="intro-screen">
+    <h1>Hi, my name is Rojin Maharjan</h1>
+  </div>
+
+  <!-- Portfolio Starts -->
   <header>
     <div class="container">
       <h1>Rojin Maharjan</h1>
@@ -40,5 +47,16 @@
   <footer>
     <p>© 2025 Rojin Maharjan</p>
   </footer>
+
+  <script>
+    // Fade out the intro screen after 2.5 seconds
+    window.addEventListener('load', () => {
+      const intro = document.querySelector('.intro-screen');
+      setTimeout(() => {
+        intro.style.opacity = '0';
+        intro.style.pointerEvents = 'none';
+      }, 2500);
+    });
+  </script>
 </body>
 </html>
