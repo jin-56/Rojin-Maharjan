@@ -50,6 +50,7 @@
             top: 50%;
             transform: translateY(-50%);
             width: 400px;
+            height: 150px; /* Rectangle shape */
             z-index: 10;
         }
 
@@ -98,16 +99,16 @@
             background-color: #000;
             border: 1px solid var(--primary);
             border-radius: 5px;
-            padding: 30px;
+            padding: 20px;
             box-shadow: 0 0 20px rgba(0, 255, 0, 0.1);
-            height: 300px;
+            height: 100%;
             overflow: hidden;
         }
 
         .terminal-header {
             display: flex;
             gap: 8px;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         .terminal-dot {
@@ -123,31 +124,15 @@
         .terminal-content {
             color: var(--primary);
             font-family: 'Courier New', monospace;
-            height: calc(100% - 40px);
-            overflow-y: auto;
         }
 
         .terminal-line {
             margin-bottom: 10px;
-            white-space: pre-wrap;
         }
 
         .prompt {
             color: var(--primary);
             margin-right: 10px;
-        }
-
-        .cursor {
-            display: inline-block;
-            width: 10px;
-            height: 18px;
-            background-color: var(--primary);
-            animation: blink 1s step-end infinite;
-        }
-
-        @keyframes blink {
-            from, to { opacity: 1; }
-            50% { opacity: 0; }
         }
 
         /* ===== Section Styles ===== */
@@ -174,11 +159,6 @@
             width: 100px;
             height: 3px;
             background-color: var(--primary);
-        }
-
-        /* ===== About Section ===== */
-        .about-content {
-            max-width: 800px;
         }
 
         /* ===== Projects Section ===== */
@@ -351,8 +331,9 @@
                 <div class="terminal-dot dot-yellow"></div>
                 <div class="terminal-dot dot-green"></div>
             </div>
-            <div class="terminal-content" id="terminal-text">
-                <!-- Text will be typed here by JavaScript -->
+            <div class="terminal-content">
+                <div class="terminal-line"><span class="prompt">$</span> My name is Rojin Maharjan</div>
+                <div class="terminal-line"><span class="prompt">$</span> Welcome to my profile</div>
             </div>
         </div>
     </div>
@@ -361,11 +342,9 @@
     <main class="main-content">
         <!-- ===== About Section ===== -->
         <section id="about">
-            <div class="about-content">
-                <h2 class="section-title">About Me</h2>
-                <p style="margin-bottom: 20px;">I'm a passionate developer with expertise in multiple technologies.</p>
-                <p>Scroll down to see my projects and skills.</p>
-            </div>
+            <h2 class="section-title">About Me</h2>
+            <p style="margin-bottom: 20px;">I'm a passionate developer with expertise in multiple technologies.</p>
+            <p>Scroll down to see my projects and skills.</p>
         </section>
 
         <!-- ===== Projects Section ===== -->
@@ -401,8 +380,6 @@
                         </div>
                     </div>
                 </div>
-                
-                <!-- Add more projects as needed -->
             </div>
         </section>
 
@@ -464,58 +441,12 @@
 
     <!-- ===== JavaScript ===== -->
     <script>
-        // Wait for DOM to load
-        document.addEventListener('DOMContentLoaded', function() {
-            // ===== Terminal Typing Effect =====
-            const terminal = document.getElementById('terminal-text');
-            const messages = [
-                "Hello my name is Rojin Maharjan",
-                "Welcome to my portfolio",
-                "I'm a passionate developer",
-                "Scroll to explore my work"
-            ];
-            let messageIndex = 0;
-            let charIndex = 0;
-            let isDeleting = false;
-            let isWaiting = false;
-            
-            function typeText() {
-                const currentMessage = messages[messageIndex];
-                
-                if (!isDeleting && charIndex <= currentMessage.length) {
-                    // Typing
-                    terminal.innerHTML = `<div class="terminal-line"><span class="prompt">$</span> ${currentMessage.substring(0, charIndex)}<span class="cursor"></span></div>`;
-                    charIndex++;
-                    setTimeout(typeText, 100);
-                } else if (isDeleting && charIndex >= 0) {
-                    // Deleting
-                    terminal.innerHTML = `<div class="terminal-line"><span class="prompt">$</span> ${currentMessage.substring(0, charIndex)}<span class="cursor"></span></div>`;
-                    charIndex--;
-                    setTimeout(typeText, 50);
-                } else {
-                    // Switch messages
-                    isDeleting = !isDeleting;
-                    if (!isDeleting) {
-                        messageIndex++;
-                        if (messageIndex >= messages.length) {
-                            messageIndex = 0;
-                        }
-                    }
-                    isWaiting = true;
-                    setTimeout(typeText, 1000);
-                }
-            }
-            
-            // Start typing after a short delay
-            setTimeout(typeText, 1000);
-
-            // ===== Smooth Scrolling =====
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    document.querySelector(this.getAttribute('href')).scrollIntoView({
-                        behavior: 'smooth'
-                    });
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
                 });
             });
         });
