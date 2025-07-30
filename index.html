@@ -3,166 +3,463 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rojin Maharjan</title>
+    <title>Rojin Maharjan | Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary: #0f0; /* Green */
-            --dark: #111;    /* Dark background */
-            --light: #fff;   /* White */
+            --primary: #0f0;
+            --dark: #111;
+            --light: #f8f8f8;
+            --gray: #333;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
         
         body {
-            margin: 0;
             font-family: 'Courier New', monospace;
-            background-color: var(--dark);
-            color: var(--light);
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
         }
         
-        /* Header with your name */
+        /* Header/Navigation */
         header {
-            padding: 20px;
+            background-color: var(--dark);
+            color: var(--light);
+            padding: 1.5rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
         }
         
-        .name {
-            color: var(--light);
-            font-size: 24px;
+        .logo {
+            font-size: 1.5rem;
             font-weight: bold;
+            color: var(--primary);
         }
         
-        /* Terminal container */
-        .terminal-container {
-            flex: 1;
+        .nav-links {
             display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
+            gap: 2rem;
         }
         
-        .terminal {
-            width: 100%;
-            max-width: 800px;
-            background-color: #000;
-            border: 1px solid var(--primary);
-            border-radius: 5px;
-            padding: 20px;
-            box-shadow: 0 0 20px rgba(0, 255, 0, 0.1);
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 2rem;
+            margin-top: 60px;
+            background: linear-gradient(135deg, var(--light) 50%, var(--dark) 50%);
+        }
+        
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 2rem;
+        }
+        
+        .hero-text h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero-text p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: var(--gray);
+        }
+        
+        .hero-terminal {
+            background-color: var(--dark);
+            color: var(--primary);
+            padding: 2rem;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
         
         .terminal-header {
             display: flex;
-            align-items: center;
-            margin-bottom: 15px;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
         }
         
-        .terminal-dots {
-            display: flex;
-            gap: 8px;
-        }
-        
-        .dot {
+        .terminal-btn {
             width: 12px;
             height: 12px;
             border-radius: 50%;
         }
         
-        .dot-red { background-color: #ff5f56; }
-        .dot-yellow { background-color: #ffbd2e; }
-        .dot-green { background-color: #27c93f; }
+        .btn-red { background-color: #ff5f56; }
+        .btn-yellow { background-color: #ffbd2e; }
+        .btn-green { background-color: #27c93f; }
         
-        .terminal-body {
-            font-family: 'Courier New', monospace;
-            color: var(--primary);
-            line-height: 1.6;
+        .terminal-content {
+            line-height: 1.8;
+        }
+        
+        .terminal-line {
+            display: flex;
         }
         
         .prompt {
             color: var(--primary);
+            margin-right: 0.5rem;
         }
         
-        .cursor {
+        /* Sections */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            position: relative;
             display: inline-block;
-            width: 10px;
-            height: 20px;
-            background-color: var(--primary);
-            animation: blink 1s step-end infinite;
         }
         
-        @keyframes blink {
-            from, to { opacity: 1; }
-            50% { opacity: 0; }
+        section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50%;
+            height: 3px;
+            background-color: var(--primary);
+        }
+        
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .project-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+        
+        .project-image {
+            height: 200px;
+            background-color: #eee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray);
+        }
+        
+        .project-info {
+            padding: 1.5rem;
+        }
+        
+        .project-info h3 {
+            margin-bottom: 0.5rem;
+        }
+        
+        .project-info p {
+            color: var(--gray);
+            margin-bottom: 1rem;
+        }
+        
+        .project-links {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .project-links a {
+            color: var(--dark);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: color 0.3s;
+        }
+        
+        .project-links a:hover {
+            color: var(--primary);
+        }
+        
+        /* Skills Section */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .skill-category {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .skill-category h3 {
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        .skill-item {
+            margin-bottom: 1rem;
+        }
+        
+        .skill-name {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+        
+        .skill-bar {
+            height: 8px;
+            background-color: #eee;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .skill-progress {
+            height: 100%;
+            background-color: var(--primary);
+            border-radius: 4px;
+        }
+        
+        /* Contact Section */
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .form-group textarea {
+            min-height: 150px;
+        }
+        
+        .submit-btn {
+            background-color: var(--dark);
+            color: var(--light);
+            border: none;
+            padding: 0.8rem 1.5rem;
+            font-family: 'Courier New', monospace;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background-color: var(--primary);
+            color: var(--dark);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: var(--light);
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .social-links a {
+            color: var(--light);
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: var(--primary);
         }
     </style>
 </head>
 <body>
     <header>
-        <div class="name">Rojin Maharjan</div>
+        <nav>
+            <div class="logo">Rojin Maharjan</div>
+            <div class="nav-links">
+                <a href="#projects">Projects</a>
+                <a href="#skills">Skills</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </nav>
     </header>
-    
-    <div class="terminal-container">
-        <div class="terminal">
-            <div class="terminal-header">
-                <div class="terminal-dots">
-                    <div class="dot dot-red"></div>
-                    <div class="dot dot-yellow"></div>
-                    <div class="dot dot-green"></div>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Hello, I'm Rojin</h1>
+                <p>A passionate developer creating innovative solutions through code.</p>
+                <a href="#projects" class="btn">View My Work</a>
+            </div>
+            <div class="hero-terminal">
+                <div class="terminal-header">
+                    <div class="terminal-btn btn-red"></div>
+                    <div class="terminal-btn btn-yellow"></div>
+                    <div class="terminal-btn btn-green"></div>
+                </div>
+                <div class="terminal-content">
+                    <div class="terminal-line">
+                        <span class="prompt">$</span> whoami
+                    </div>
+                    <div class="terminal-line">
+                        rojin_maharjan
+                    </div>
+                    <div class="terminal-line">
+                        <span class="prompt">$</span> cat about.txt
+                    </div>
+                    <div class="terminal-line">
+                        Full-stack developer
+                    </div>
+                    <div class="terminal-line">
+                        Python | JavaScript | React
+                    </div>
+                    <div class="terminal-line">
+                        <span class="prompt">$</span> _
+                    </div>
                 </div>
             </div>
-            <div class="terminal-body" id="terminal-text">
-                <!-- Text will be typed here -->
-            </div>
         </div>
-    </div>
+    </section>
+
+    <section id="projects">
+        <h2>Featured Projects</h2>
+        <div class="projects-grid">
+            <!-- Project cards will be added here -->
+            <div class="project-card">
+                <div class="project-image">
+                    [Project Screenshot]
+                </div>
+                <div class="project-info">
+                    <h3>Project Title</h3>
+                    <p>Brief description of the project and technologies used.</p>
+                    <div class="project-links">
+                        <a href="#"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                        <a href="#"><i class="fab fa-github"></i> Source Code</a>
+                    </div>
+                </div>
+            </div>
+            <!-- More project cards -->
+        </div>
+    </section>
+
+    <section id="skills">
+        <h2>Skills & Expertise</h2>
+        <div class="skills-container">
+            <div class="skill-category">
+                <h3>Frontend</h3>
+                <div class="skill-item">
+                    <div class="skill-name">
+                        <span>React</span>
+                        <span>85%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 85%;"></div>
+                    </div>
+                </div>
+                <!-- More skills -->
+            </div>
+            <!-- More skill categories -->
+        </div>
+    </section>
+
+    <section id="about">
+        <h2>About Me</h2>
+        <p>I'm a passionate developer with experience building web applications and solving complex problems. My journey in tech began...</p>
+        <!-- More about content -->
+    </section>
+
+    <section id="contact">
+        <h2>Get In Touch</h2>
+        <form class="contact-form">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" required>
+            </div>
+            <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" required></textarea>
+            </div>
+            <button type="submit" class="submit-btn">Send Message</button>
+        </form>
+    </section>
+
+    <footer>
+        <div class="social-links">
+            <a href="#"><i class="fab fa-github"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+        </div>
+        <p>&copy; 2023 Rojin Maharjan. All rights reserved.</p>
+    </footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const terminal = document.getElementById('terminal-text');
-            const messages = [
-                "Hi my name is Rojin Maharjan",
-                "Welcome to my portfolio"
-            ];
-            let messageIndex = 0;
-            let charIndex = 0;
-            let isDeleting = false;
-            let isWaiting = false;
-            
-            function typeText() {
-                if (messageIndex >= messages.length) {
-                    messageIndex = 0;
-                }
-                
-                const currentMessage = messages[messageIndex];
-                
-                if (!isDeleting && charIndex <= currentMessage.length) {
-                    // Typing
-                    terminal.innerHTML = `<span class="prompt">$</span> ${currentMessage.substring(0, charIndex)}<span class="cursor"></span>`;
-                    charIndex++;
-                    setTimeout(typeText, 100);
-                } else if (isDeleting && charIndex >= 0) {
-                    // Deleting
-                    terminal.innerHTML = `<span class="prompt">$</span> ${currentMessage.substring(0, charIndex)}<span class="cursor"></span>`;
-                    charIndex--;
-                    setTimeout(typeText, 50);
-                } else {
-                    // Switch messages
-                    isDeleting = !isDeleting;
-                    if (!isDeleting) {
-                        messageIndex++;
-                    }
-                    isWaiting = true;
-                    setTimeout(typeText, 1000);
-                }
-            }
-            
-            // Start typing after a short delay
-            setTimeout(typeText, 1000);
-        });
+        // JavaScript for dynamic project loading from GitHub API
+        // Will be added in the next step
     </script>
 </body>
 </html>
