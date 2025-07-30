@@ -1,62 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Rojin Maharjan - Portfolio</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
+<div class="sidebar">
+    <div class="logo">Your Logo/Name</div>
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#about">About Me</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+</div>
 
-  <!-- Intro Screen -->
-  <div class="intro-screen">
-    <h1>Hi, my name is Rojin Maharjan</h1>
-  </div>
-
-  <!-- Portfolio Starts -->
-  <header>
-    <div class="container">
-      <h1>Rojin Maharjan</h1>
-      <p>AI | Data Science | Web Developer</p>
-    </div>
-  </header>
-
-  <section id="about" class="container">
-    <h2>About Me</h2>
-    <p>
-      I’m a Computer Engineering student passionate about AI, Machine Learning, and web development.
-      I enjoy building real-time systems and learning new technologies.
-    </p>
-  </section>
-
-  <section id="projects" class="container">
-    <h2>Projects</h2>
-    <ul>
-      <li><strong>AI Mock Interview System</strong> – Voice + Emotion aware interview system using wav2vec + SBERT.</li>
-      <li><strong>Traffic Rider Near-Miss Detection</strong> – YOLOv8-based real-time motorcycle game mechanic.</li>
-      <li><strong>ASL Detection</strong> – Real-time American Sign Language interpreter with voice output.</li>
-    </ul>
-  </section>
-
-  <section id="contact" class="container">
-    <h2>Contact</h2>
-    <p>Email: rojinmaharjan@gmail.com</p>
-    <p>GitHub: <a href="https://github.com/jin-56" target="_blank">rojinmaharjan</a></p>
-  </section>
-
-  <footer>
-    <p>© 2025 Rojin Maharjan</p>
-  </footer>
-
-  <script>
-    // Fade out the intro screen after 2.5 seconds
-    window.addEventListener('load', () => {
-      const intro = document.querySelector('.intro-screen');
-      setTimeout(() => {
-        intro.style.opacity = '0';
-        intro.style.pointerEvents = 'none';
-      }, 2500);
-    });
-  </script>
-</body>
-</html>
+<div class="main-content">
+    <section id="home" class="hero">
+        <div class="terminal-box">
+            <pre class="typewriter">
+<span class="prompt">$</span> Hello, my name is Rojin Maharjan.
+<span class="prompt">$</span> Welcome to my portfolio.
+            </pre>
+        </div>
+    </section>
+    
+    <section id="projects">
+        <h2>My Projects</h2>
+        <!-- Project cards go here -->
+    </section>
+    
+    <section id="skills">
+        <h2>Skills & Certifications</h2>
+        <!-- Skills list goes here -->
+    </section>
+    
+    <section id="contact">
+        <h2>Contact Me</h2>
+        <!-- Contact form/info goes here -->
+    </section>
+</div>
