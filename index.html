@@ -4,73 +4,540 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rojin Maharjan | Portfolio</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #00ff9d;
+            --bg-dark: #121212;
+            --text-light: #f0f0f0;
+            --terminal-bg: #1e1e1e;
+            --card-bg: #252525;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Courier New', monospace;
+        }
+
+        body {
+            display: flex;
+            min-height: 100vh;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            background-color: #000;
+            padding: 2rem 1rem;
+            position: fixed;
+            height: 100vh;
+            border-right: 1px solid #333;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            margin-bottom: 3rem;
+            color: var(--primary);
+            text-align: center;
+        }
+
+        .nav-links {
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-bottom: 1.5rem;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 1.1rem;
+            display: block;
+            padding: 0.5rem 1rem;
+            border-left: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--primary);
+            border-left: 3px solid var(--primary);
+            background-color: #222;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 250px;
+            flex: 1;
+            padding: 2rem;
+        }
+
+        /* Terminal Box */
+        .terminal {
+            background-color: var(--terminal-bg);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            border: 1px solid #333;
+        }
+
+        .terminal-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #333;
+        }
+
+        .terminal-dots {
+            display: flex;
+            gap: 8px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .dot-red { background-color: #ff5f56; }
+        .dot-yellow { background-color: #ffbd2e; }
+        .dot-green { background-color: #27c93f; }
+
+        .terminal-title {
+            margin-left: 1rem;
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        .terminal-body {
+            line-height: 1.6;
+        }
+
+        .command {
+            color: var(--primary);
+        }
+
+        .output {
+            margin-top: 0.5rem;
+        }
+
+        /* Sections */
+        section {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        section.active {
+            display: block;
+        }
+
+        .section-title {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        /* Education */
+        .education-item {
+            margin-bottom: 1.5rem;
+        }
+
+        .education-item h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Skills */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .skill-card {
+            background-color: var(--card-bg);
+            padding: 1rem;
+            border-radius: 6px;
+            border-left: 3px solid var(--primary);
+        }
+
+        /* Projects */
+        .projects-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .project-card {
+            background-color: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .project-card h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .project-links {
+            margin-top: 1rem;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .project-links a {
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        /* Certifications */
+        .certifications-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .cert-card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .cert-card:hover {
+            transform: scale(1.03);
+        }
+
+        .cert-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .cert-info {
+            padding: 1rem;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 100;
+            padding: 2rem;
+            box-sizing: border-box;
+        }
+
+        .modal-content {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: var(--card-bg);
+            padding: 2rem;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            color: var(--text-light);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .modal-img {
+            width: 100%;
+            max-height: 500px;
+            object-fit: contain;
+            margin-bottom: 1rem;
+        }
+
+        /* Contact */
+        .contact-links {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-light);
+            text-decoration: none;
+            padding: 0.8rem 1.2rem;
+            background-color: var(--card-bg);
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-link:hover {
+            background-color: var(--primary);
+            color: #000;
+        }
+
+        .contact-link i {
+            font-size: 1.2rem;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                padding: 1rem;
+            }
+            .main-content {
+                margin-left: 0;
+            }
+            .nav-links {
+                display: flex;
+                overflow-x: auto;
+                gap: 1rem;
+            }
+            .nav-links li {
+                margin-bottom: 0;
+            }
+            .nav-links a {
+                border-left: none;
+                border-bottom: 3px solid transparent;
+            }
+            .nav-links a:hover, .nav-links a.active {
+                border-left: none;
+                border-bottom: 3px solid var(--primary);
+            }
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <nav>
-                <div class="logo">RM</div>
-                <ul class="nav-links">
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#skills">Skills</a></li>
-                    <li><a href="#projects">Projects</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-                <div class="burger">
-                    <div class="line1"></div>
-                    <div class="line2"></div>
-                    <div class="line3"></div>
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+        <div class="logo">RM</div>
+        <ul class="nav-links">
+            <li><a href="#education" class="active">Education</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#certifications">Certifications</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Terminal Box -->
+        <div class="terminal">
+            <div class="terminal-header">
+                <div class="terminal-dots">
+                    <div class="dot dot-red"></div>
+                    <div class="dot dot-yellow"></div>
+                    <div class="dot dot-green"></div>
                 </div>
-            </nav>
-        </div>
-    </header>
-
-    <section id="home" class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <h1>Hi, I'm <span>Rojin Maharjan</span></h1>
-                <h2>Web Developer & Designer</h2>
-                <p>I create beautiful, functional websites that help businesses grow.</p>
-                <a href="#projects" class="btn">View My Work</a>
+                <div class="terminal-title">bash</div>
             </div>
-            <div class="hero-image">
-                <img src="https://via.placeholder.com/400x400" alt="Rojin Maharjan">
+            <div class="terminal-body">
+                <div class="command">$ whoami</div>
+                <div class="output">Rojin Maharjan</div>
+                <div class="command">$ echo "Welcome to my profile"</div>
+                <div class="output">Welcome to my profile</div>
             </div>
         </div>
-    </section>
 
-    <section id="about" class="about">
-        <div class="container">
-            <h2 class="section-title">About Me</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <p>I'm Rojin Maharjan, a passionate web developer with experience creating modern, responsive websites and web applications. I specialize in front-end development but also have experience with back-end technologies.</p>
-                    <p>When I'm not coding, you can find me exploring new technologies, contributing to open-source projects, or enjoying outdoor activities.</p>
-                    <div class="social-icons">
-                        <a href="#"><i class="fab fa-github"></i></a>
-                        <a href="#"><i class="fab fa-linkedin"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
+        <!-- Education Section -->
+        <section id="education" class="active">
+            <h2 class="section-title">Education</h2>
+            <div class="education-item">
+                <h3>Bachelor's Degree in Computer Science</h3>
+                <p>Your University Name, Year - Year</p>
+                <p>Description of your degree program and achievements.</p>
+            </div>
+            <div class="education-item">
+                <h3>Higher Secondary Education</h3>
+                <p>Your College Name, Year - Year</p>
+                <p>Major subjects and accomplishments.</p>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills">
+            <h2 class="section-title">Skills</h2>
+            <div class="skills-container">
+                <div class="skill-card">
+                    <h3>Python</h3>
+                    <p>Advanced programming skills with Python</p>
+                </div>
+                <div class="skill-card">
+                    <h3>C++</h3>
+                    <p>Object-oriented programming with C++</p>
+                </div>
+                <div class="skill-card">
+                    <h3>Git</h3>
+                    <p>Version control and collaboration</p>
+                </div>
+                <!-- Add more skills as needed -->
+                <div class="skill-card">
+                    <h3>Web Development</h3>
+                    <p>HTML, CSS, JavaScript</p>
+                </div>
+                <div class="skill-card">
+                    <h3>Database</h3>
+                    <p>SQL, MongoDB</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects">
+            <h2 class="section-title">Projects</h2>
+            <div class="projects-container">
+                <div class="project-card">
+                    <h3>Project Name 1</h3>
+                    <p>Brief description of what the project does and technologies used.</p>
+                    <div class="project-links">
+                        <a href="#" target="_blank"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                        <a href="#" target="_blank"><i class="fab fa-github"></i> Source Code</a>
                     </div>
                 </div>
-                <div class="about-image">
-                    <img src="https://via.placeholder.com/300x400" alt="About Rojin">
+                <div class="project-card">
+                    <h3>Project Name 2</h3>
+                    <p>Brief description of what the project does and technologies used.</p>
+                    <div class="project-links">
+                        <a href="#" target="_blank"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                        <a href="#" target="_blank"><i class="fab fa-github"></i> Source Code</a>
+                    </div>
                 </div>
+                <!-- Add more projects as needed -->
+            </div>
+        </section>
+
+        <!-- Certifications Section -->
+        <section id="certifications">
+            <h2 class="section-title">Certifications</h2>
+            <div class="certifications-container">
+                <div class="cert-card" onclick="openModal('cert1.jpg', 'Python Certification')">
+                    <img src="https://via.placeholder.com/300x200" alt="Certification 1" class="cert-img">
+                    <div class="cert-info">
+                        <h3>Python Certification</h3>
+                        <p>Issued by ABC Organization</p>
+                    </div>
+                </div>
+                <div class="cert-card" onclick="openModal('cert2.jpg', 'Web Development Certification')">
+                    <img src="https://via.placeholder.com/300x200" alt="Certification 2" class="cert-img">
+                    <div class="cert-info">
+                        <h3>Web Development</h3>
+                        <p>Issued by XYZ Academy</p>
+                    </div>
+                </div>
+                <!-- Add more certifications as needed -->
+            </div>
+        </section>
+
+        <!-- Certifications Modal -->
+        <div id="certModal" class="modal">
+            <div class="modal-content">
+                <span class="close-modal" onclick="closeModal()">&times;</span>
+                <img id="modalImage" class="modal-img" src="" alt="Certification">
+                <h3 id="modalTitle"></h3>
+                <p id="modalDesc">Detailed description about this certification and what skills it represents.</p>
             </div>
         </div>
-    </section>
 
-    <!-- Rest of the HTML remains the same, just change any "Alex Carter" to "Rojin Maharjan" -->
-    
-    <footer>
-        <div class="container">
-            <p>&copy; <span id="year"></span> Rojin Maharjan. All rights reserved.</p>
-        </div>
-    </footer>
+        <!-- Contact Section -->
+        <section id="contact">
+            <h2 class="section-title">Contact</h2>
+            <div class="contact-links">
+                <a href="https://linkedin.com/in/yourprofile" target="_blank" class="contact-link">
+                    <i class="fab fa-linkedin"></i> LinkedIn
+                </a>
+                <a href="https://github.com/yourusername" target="_blank" class="contact-link">
+                    <i class="fab fa-github"></i> GitHub
+                </a>
+                <a href="https://instagram.com/yourhandle" target="_blank" class="contact-link">
+                    <i class="fab fa-instagram"></i> Instagram
+                </a>
+                <a href="mailto:your.email@example.com" class="contact-link">
+                    <i class="fas fa-envelope"></i> Email
+                </a>
+            </div>
+        </section>
+    </main>
 
-    <script src="script.js"></script>
+    <script>
+        // Navigation
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Remove active class from all links
+                document.querySelectorAll('.nav-links a').forEach(item => {
+                    item.classList.remove('active');
+                });
+                
+                // Add active class to clicked link
+                this.classList.add('active');
+                
+                // Hide all sections
+                document.querySelectorAll('section').forEach(section => {
+                    section.classList.remove('active');
+                });
+                
+                // Show clicked section
+                const target = this.getAttribute('href');
+                document.querySelector(target).classList.add('active');
+            });
+        });
+
+        // Modal functionality
+        function openModal(imgSrc, title) {
+            const modal = document.getElementById('certModal');
+            const modalImg = document.getElementById('modalImage');
+            const modalTitle = document.getElementById('modalTitle');
+            
+            modal.style.display = 'block';
+            modalImg.src = imgSrc;
+            modalTitle.textContent = title;
+        }
+
+        function closeModal() {
+            document.getElementById('certModal').style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('certModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+
+        // Default to education section
+        document.querySelector('#education').classList.add('active');
+    </script>
 </body>
 </html>
