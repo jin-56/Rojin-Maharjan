@@ -3,453 +3,189 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rojin Maharjan - Portfolio</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        /* ===== Global Styles ===== */
-        :root {
-            --primary: #0f0;         /* Green terminal text */
-            --dark: #111;            /* Dark background */
-            --light: #fff;           /* White text */
-            --gray: #333;            /* Gray elements */
-            --section-padding: 80px; /* Section padding */
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Courier New', monospace;
-            background-color: var(--dark);
-            color: var(--light);
-            line-height: 1.6;
-            display: flex;
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-
-        /* ===== Layout Structure ===== */
-        /* Left Side Navigation */
-        .sidebar {
-            width: 250px;
-            background-color: var(--dark);
-            padding: 30px 20px;
-            position: fixed;
-            height: 100vh;
-            overflow-y: auto;
-            border-right: 1px solid var(--gray);
-        }
-
-        /* Right Side Terminal Box - Fixed Position */
-        .terminal-container {
-            position: fixed;
-            right: 30px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 400px;
-            height: 150px; /* Rectangle shape */
-            z-index: 10;
-        }
-
-        /* Main Content Area */
-        .main-content {
-            margin-left: 250px;
-            flex: 1;
-            padding: 20px;
-            max-width: calc(100% - 250px - 400px); /* Adjust based on sidebar and terminal width */
-        }
-
-        /* ===== Navigation Styles ===== */
-        .logo {
-            color: var(--light);
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 40px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid var(--gray);
-        }
-
-        .nav-links {
-            list-style: none;
-        }
-
-        .nav-links li {
-            margin-bottom: 15px;
-        }
-
-        .nav-links a {
-            color: var(--light);
-            text-decoration: none;
-            font-size: 18px;
-            display: block;
-            padding: 8px 0;
-            transition: all 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary);
-            padding-left: 10px;
-        }
-
-        /* ===== Terminal Box Styles ===== */
-        .terminal-box {
-            background-color: #000;
-            border: 1px solid var(--primary);
-            border-radius: 5px;
-            padding: 20px;
-            box-shadow: 0 0 20px rgba(0, 255, 0, 0.1);
-            height: 100%;
-            overflow: hidden;
-        }
-
-        .terminal-header {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 15px;
-        }
-
-        .terminal-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-        }
-
-        .dot-red { background-color: #ff5f56; }
-        .dot-yellow { background-color: #ffbd2e; }
-        .dot-green { background-color: #27c93f; }
-
-        .terminal-content {
-            color: var(--primary);
-            font-family: 'Courier New', monospace;
-        }
-
-        .terminal-line {
-            margin-bottom: 10px;
-        }
-
-        .prompt {
-            color: var(--primary);
-            margin-right: 10px;
-        }
-
-        /* ===== Section Styles ===== */
-        section {
-            min-height: 100vh;
-            padding: var(--section-padding) 0;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .section-title {
-            font-size: 32px;
-            margin-bottom: 40px;
-            color: var(--primary);
-            position: relative;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 100px;
-            height: 3px;
-            background-color: var(--primary);
-        }
-
-        /* ===== Projects Section ===== */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        .project-card {
-            background-color: var(--gray);
-            border-radius: 5px;
-            overflow: hidden;
-            transition: transform 0.3s;
-        }
-
-        .project-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .project-image {
-            height: 200px;
-            background-color: #444;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--light);
-        }
-
-        .project-info {
-            padding: 20px;
-        }
-
-        .project-title {
-            font-size: 20px;
-            margin-bottom: 10px;
-            color: var(--primary);
-        }
-
-        .project-links {
-            display: flex;
-            gap: 15px;
-            margin-top: 15px;
-        }
-
-        .project-links a {
-            color: var(--light);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            transition: color 0.3s;
-        }
-
-        .project-links a:hover {
-            color: var(--primary);
-        }
-
-        /* ===== Skills Section ===== */
-        .skills-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 30px;
-        }
-
-        .skill-card {
-            background-color: var(--gray);
-            border-radius: 5px;
-            padding: 20px;
-        }
-
-        .skill-title {
-            font-size: 20px;
-            margin-bottom: 15px;
-            color: var(--primary);
-        }
-
-        .certification {
-            margin-bottom: 20px;
-        }
-
-        .cert-image {
-            width: 100%;
-            height: 150px;
-            background-color: #444;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--light);
-        }
-
-        /* ===== Contact Section ===== */
-        .contact-links {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-
-        .contact-link {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: var(--light);
-            text-decoration: none;
-            font-size: 18px;
-            padding: 10px 20px;
-            border: 1px solid var(--gray);
-            border-radius: 5px;
-            transition: all 0.3s;
-        }
-
-        .contact-link:hover {
-            border-color: var(--primary);
-            color: var(--primary);
-        }
-
-        /* ===== Responsive Design ===== */
-        @media (max-width: 1200px) {
-            .terminal-container {
-                display: none; /* Hide terminal on smaller screens */
-            }
-            .main-content {
-                max-width: calc(100% - 250px);
-            }
-        }
-
-        @media (max-width: 768px) {
-            body {
-                flex-direction: column;
-            }
-
-            .sidebar {
-                width: 100%;
-                height: auto;
-                position: static;
-                border-right: none;
-                border-bottom: 1px solid var(--gray);
-            }
-
-            .main-content {
-                margin-left: 0;
-                max-width: 100%;
-                padding: 20px 15px;
-            }
-
-            section {
-                padding: 60px 0;
-            }
-        }
-    </style>
+    <title>Alex Carter | Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <!-- ===== Left Side Navigation ===== -->
-    <aside class="sidebar">
-        <div class="logo">Rojin Maharjan</div>
-        <ul class="nav-links">
-            <li><a href="#about">About Me</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#skills">Skills & Certifications</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-    </aside>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">AC</div>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <div class="burger">
+                    <div class="line1"></div>
+                    <div class="line2"></div>
+                    <div class="line3"></div>
+                </div>
+            </nav>
+        </div>
+    </header>
 
-    <!-- ===== Fixed Right Side Terminal ===== -->
-    <div class="terminal-container">
-        <div class="terminal-box">
-            <div class="terminal-header">
-                <div class="terminal-dot dot-red"></div>
-                <div class="terminal-dot dot-yellow"></div>
-                <div class="terminal-dot dot-green"></div>
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Hi, I'm <span>Alex Carter</span></h1>
+                <h2>Web Developer & Designer</h2>
+                <p>I create beautiful, functional websites that help businesses grow.</p>
+                <a href="#projects" class="btn">View My Work</a>
             </div>
-            <div class="terminal-content">
-                <div class="terminal-line"><span class="prompt">$</span> My name is Rojin Maharjan</div>
-                <div class="terminal-line"><span class="prompt">$</span> Welcome to my profile</div>
+            <div class="hero-image">
+                <img src="https://via.placeholder.com/400x400" alt="Alex Carter">
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- ===== Main Content ===== -->
-    <main class="main-content">
-        <!-- ===== About Section ===== -->
-        <section id="about">
+    <section id="about" class="about">
+        <div class="container">
             <h2 class="section-title">About Me</h2>
-            <p style="margin-bottom: 20px;">I'm a passionate developer with expertise in multiple technologies.</p>
-            <p>Scroll down to see my projects and skills.</p>
-        </section>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>I'm a passionate web developer with 5 years of experience creating modern, responsive websites and web applications. I specialize in front-end development but also have experience with back-end technologies.</p>
+                    <p>When I'm not coding, you can find me hiking, reading sci-fi novels, or experimenting with new recipes in the kitchen.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <img src="https://via.placeholder.com/300x400" alt="About Alex">
+                </div>
+            </div>
+        </div>
+    </section>
 
-        <!-- ===== Projects Section ===== -->
-        <section id="projects">
+    <section id="skills" class="skills">
+        <div class="container">
+            <h2 class="section-title">My Skills</h2>
+            <div class="skills-grid">
+                <div class="skill">
+                    <i class="fab fa-html5"></i>
+                    <h3>HTML5</h3>
+                    <div class="skill-bar">
+                        <div class="skill-level html">90%</div>
+                    </div>
+                </div>
+                <div class="skill">
+                    <i class="fab fa-css3-alt"></i>
+                    <h3>CSS3</h3>
+                    <div class="skill-bar">
+                        <div class="skill-level css">85%</div>
+                    </div>
+                </div>
+                <div class="skill">
+                    <i class="fab fa-js"></i>
+                    <h3>JavaScript</h3>
+                    <div class="skill-bar">
+                        <div class="skill-level js">80%</div>
+                    </div>
+                </div>
+                <div class="skill">
+                    <i class="fab fa-react"></i>
+                    <h3>React</h3>
+                    <div class="skill-bar">
+                        <div class="skill-level react">75%</div>
+                    </div>
+                </div>
+                <div class="skill">
+                    <i class="fab fa-node-js"></i>
+                    <h3>Node.js</h3>
+                    <div class="skill-bar">
+                        <div class="skill-level node">70%</div>
+                    </div>
+                </div>
+                <div class="skill">
+                    <i class="fas fa-database"></i>
+                    <h3>MongoDB</h3>
+                    <div class="skill-bar">
+                        <div class="skill-level mongo">65%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="projects">
+        <div class="container">
             <h2 class="section-title">My Projects</h2>
             <div class="projects-grid">
-                <!-- Project 1 -->
                 <div class="project-card">
-                    <div class="project-image">
-                        [Project 1 Image]
-                    </div>
+                    <img src="https://via.placeholder.com/400x250" alt="Project 1">
                     <div class="project-info">
-                        <h3 class="project-title">Project 1</h3>
-                        <p>Description of project 1 goes here. Explain what it does and technologies used.</p>
+                        <h3>E-commerce Website</h3>
+                        <p>A fully responsive e-commerce platform with cart functionality and payment integration.</p>
                         <div class="project-links">
-                            <a href="#" target="_blank"><i class="fas fa-external-link-alt"></i> Live Demo</a>
-                            <a href="#" target="_blank"><i class="fab fa-github"></i> Source Code</a>
+                            <a href="#" class="btn-small">Live Demo</a>
+                            <a href="#" class="btn-small">Code</a>
                         </div>
                     </div>
                 </div>
-                
-                <!-- Project 2 -->
                 <div class="project-card">
-                    <div class="project-image">
-                        [Project 2 Image]
-                    </div>
+                    <img src="https://via.placeholder.com/400x250" alt="Project 2">
                     <div class="project-info">
-                        <h3 class="project-title">Project 2</h3>
-                        <p>Description of project 2 goes here. Explain what it does and technologies used.</p>
+                        <h3>Task Management App</h3>
+                        <p>A productivity app for managing tasks with drag-and-drop functionality.</p>
                         <div class="project-links">
-                            <a href="#" target="_blank"><i class="fas fa-external-link-alt"></i> Live Demo</a>
-                            <a href="#" target="_blank"><i class="fab fa-github"></i> Source Code</a>
+                            <a href="#" class="btn-small">Live Demo</a>
+                            <a href="#" class="btn-small">Code</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <img src="https://via.placeholder.com/400x250" alt="Project 3">
+                    <div class="project-info">
+                        <h3>Weather Dashboard</h3>
+                        <p>Real-time weather information with 5-day forecast using API integration.</p>
+                        <div class="project-links">
+                            <a href="#" class="btn-small">Live Demo</a>
+                            <a href="#" class="btn-small">Code</a>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- ===== Skills & Certifications Section ===== -->
-        <section id="skills">
-            <h2 class="section-title">Skills & Certifications</h2>
-            <div class="skills-container">
-                <!-- Skills Column -->
-                <div class="skill-card">
-                    <h3 class="skill-title">Technical Skills</h3>
-                    <ul>
-                        <li>JavaScript/TypeScript</li>
-                        <li>Python</li>
-                        <li>React.js</li>
-                        <li>Node.js</li>
-                        <li>HTML/CSS</li>
-                        <li>Git/GitHub</li>
-                    </ul>
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Contact Information</h3>
+                    <p><i class="fas fa-envelope"></i> alex@example.com</p>
+                    <p><i class="fas fa-phone"></i> (123) 456-7890</p>
+                    <p><i class="fas fa-map-marker-alt"></i> San Francisco, CA</p>
                 </div>
-                
-                <!-- Certifications Column -->
-                <div class="skill-card">
-                    <h3 class="skill-title">Certifications</h3>
-                    <div class="certification">
-                        <div class="cert-image">
-                            [Certification 1 Image]
-                        </div>
-                        <p>Certification Name - Issuing Organization (Year)</p>
+                <form class="contact-form">
+                    <div class="form-group">
+                        <input type="text" placeholder="Your Name" required>
                     </div>
-                    <div class="certification">
-                        <div class="cert-image">
-                            [Certification 2 Image]
-                        </div>
-                        <p>Certification Name - Issuing Organization (Year)</p>
+                    <div class="form-group">
+                        <input type="email" placeholder="Your Email" required>
                     </div>
-                </div>
+                    <div class="form-group">
+                        <textarea placeholder="Your Message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn">Send Message</button>
+                </form>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- ===== Contact Section ===== -->
-        <section id="contact">
-            <h2 class="section-title">Contact Me</h2>
-            <div class="contact-links">
-                <a href="https://github.com/jin-56" class="contact-link" target="_blank">
-                    <i class="fab fa-github"></i> GitHub
-                </a>
-                <a href="#" class="contact-link" target="_blank">
-                    <i class="fab fa-linkedin"></i> LinkedIn
-                </a>
-                <a href="#" class="contact-link" target="_blank">
-                    <i class="fab fa-instagram"></i> Instagram
-                </a>
-                <a href="mailto:your-email@example.com" class="contact-link">
-                    <i class="fas fa-envelope"></i> Email
-                </a>
-            </div>
-        </section>
-    </main>
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Alex Carter. All rights reserved.</p>
+        </div>
+    </footer>
 
-    <!-- ===== JavaScript ===== -->
-    <script>
-        // Smooth scrolling for navigation
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
