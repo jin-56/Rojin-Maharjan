@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Basic Meta Tags -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rojin Maharjan - Portfolio</title>
-    <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* ===== Global Styles ===== */
@@ -29,16 +27,11 @@
             color: var(--light);
             line-height: 1.6;
             display: flex;
-            flex-direction: column;
             min-height: 100vh;
+            overflow-x: hidden;
         }
 
         /* ===== Layout Structure ===== */
-        .container {
-            display: flex;
-            flex: 1;
-        }
-
         /* Left Side Navigation */
         .sidebar {
             width: 250px;
@@ -50,11 +43,22 @@
             border-right: 1px solid var(--gray);
         }
 
+        /* Right Side Terminal Box - Fixed Position */
+        .terminal-container {
+            position: fixed;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 400px;
+            z-index: 10;
+        }
+
         /* Main Content Area */
         .main-content {
             margin-left: 250px;
             flex: 1;
             padding: 20px;
+            max-width: calc(100% - 250px - 400px); /* Adjust based on sidebar and terminal width */
         }
 
         /* ===== Navigation Styles ===== */
@@ -89,45 +93,15 @@
             padding-left: 10px;
         }
 
-        /* ===== Section Styles ===== */
-        section {
-            min-height: 100vh;
-            padding: var(--section-padding) 0;
-            display: flex;
-            align-items: center;
-        }
-
-        .section-title {
-            font-size: 32px;
-            margin-bottom: 40px;
-            color: var(--primary);
-            position: relative;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 100px;
-            height: 3px;
-            background-color: var(--primary);
-        }
-
-        /* ===== About Section ===== */
-        .about-container {
-            display: flex;
-            align-items: center;
-            gap: 50px;
-        }
-
+        /* ===== Terminal Box Styles ===== */
         .terminal-box {
-            flex: 1;
             background-color: #000;
             border: 1px solid var(--primary);
             border-radius: 5px;
             padding: 30px;
             box-shadow: 0 0 20px rgba(0, 255, 0, 0.1);
+            height: 300px;
+            overflow: hidden;
         }
 
         .terminal-header {
@@ -149,10 +123,13 @@
         .terminal-content {
             color: var(--primary);
             font-family: 'Courier New', monospace;
+            height: calc(100% - 40px);
+            overflow-y: auto;
         }
 
         .terminal-line {
             margin-bottom: 10px;
+            white-space: pre-wrap;
         }
 
         .prompt {
@@ -171,6 +148,37 @@
         @keyframes blink {
             from, to { opacity: 1; }
             50% { opacity: 0; }
+        }
+
+        /* ===== Section Styles ===== */
+        section {
+            min-height: 100vh;
+            padding: var(--section-padding) 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .section-title {
+            font-size: 32px;
+            margin-bottom: 40px;
+            color: var(--primary);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100px;
+            height: 3px;
+            background-color: var(--primary);
+        }
+
+        /* ===== About Section ===== */
+        .about-content {
+            max-width: 800px;
         }
 
         /* ===== Projects Section ===== */
@@ -289,8 +297,17 @@
         }
 
         /* ===== Responsive Design ===== */
+        @media (max-width: 1200px) {
+            .terminal-container {
+                display: none; /* Hide terminal on smaller screens */
+            }
+            .main-content {
+                max-width: calc(100% - 250px);
+            }
+        }
+
         @media (max-width: 768px) {
-            .container {
+            body {
                 flex-direction: column;
             }
 
@@ -304,148 +321,146 @@
 
             .main-content {
                 margin-left: 0;
+                max-width: 100%;
+                padding: 20px 15px;
             }
 
-            .about-container {
-                flex-direction: column;
-            }
-
-            .terminal-box {
-                width: 100%;
+            section {
+                padding: 60px 0;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- ===== Left Side Navigation ===== -->
-        <aside class="sidebar">
-            <div class="logo">Rojin Maharjan</div>
-            <ul class="nav-links">
-                <li><a href="#about">About Me</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#skills">Skills & Certifications</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </aside>
+    <!-- ===== Left Side Navigation ===== -->
+    <aside class="sidebar">
+        <div class="logo">Rojin Maharjan</div>
+        <ul class="nav-links">
+            <li><a href="#about">About Me</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#skills">Skills & Certifications</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </aside>
 
-        <!-- ===== Main Content ===== -->
-        <main class="main-content">
-            <!-- ===== About Section ===== -->
-            <section id="about">
-                <div class="about-container">
-                    <div style="flex: 1;">
-                        <h2 class="section-title">About Me</h2>
-                        <p style="margin-bottom: 20px;">I'm a passionate developer with expertise in multiple technologies.</p>
-                        <p>Scroll down to see my projects and skills.</p>
-                    </div>
-                    <div class="terminal-box">
-                        <div class="terminal-header">
-                            <div class="terminal-dot dot-red"></div>
-                            <div class="terminal-dot dot-yellow"></div>
-                            <div class="terminal-dot dot-green"></div>
-                        </div>
-                        <div class="terminal-content" id="terminal-text">
-                            <!-- Text will be typed here by JavaScript -->
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- ===== Projects Section ===== -->
-            <section id="projects">
-                <h2 class="section-title">My Projects</h2>
-                <div class="projects-grid">
-                    <!-- Project 1 -->
-                    <div class="project-card">
-                        <div class="project-image">
-                            [Project 1 Image]
-                        </div>
-                        <div class="project-info">
-                            <h3 class="project-title">Project 1</h3>
-                            <p>Description of project 1 goes here. Explain what it does and technologies used.</p>
-                            <div class="project-links">
-                                <a href="#" target="_blank"><i class="fas fa-external-link-alt"></i> Live Demo</a>
-                                <a href="#" target="_blank"><i class="fab fa-github"></i> Source Code</a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Project 2 -->
-                    <div class="project-card">
-                        <div class="project-image">
-                            [Project 2 Image]
-                        </div>
-                        <div class="project-info">
-                            <h3 class="project-title">Project 2</h3>
-                            <p>Description of project 2 goes here. Explain what it does and technologies used.</p>
-                            <div class="project-links">
-                                <a href="#" target="_blank"><i class="fas fa-external-link-alt"></i> Live Demo</a>
-                                <a href="#" target="_blank"><i class="fab fa-github"></i> Source Code</a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Add more projects as needed -->
-                </div>
-            </section>
-
-            <!-- ===== Skills & Certifications Section ===== -->
-            <section id="skills">
-                <h2 class="section-title">Skills & Certifications</h2>
-                <div class="skills-container">
-                    <!-- Skills Column -->
-                    <div class="skill-card">
-                        <h3 class="skill-title">Technical Skills</h3>
-                        <ul>
-                            <li>JavaScript/TypeScript</li>
-                            <li>Python</li>
-                            <li>React.js</li>
-                            <li>Node.js</li>
-                            <li>HTML/CSS</li>
-                            <li>Git/GitHub</li>
-                        </ul>
-                    </div>
-                    
-                    <!-- Certifications Column -->
-                    <div class="skill-card">
-                        <h3 class="skill-title">Certifications</h3>
-                        <div class="certification">
-                            <div class="cert-image">
-                                [Certification 1 Image]
-                            </div>
-                            <p>Certification Name - Issuing Organization (Year)</p>
-                        </div>
-                        <div class="certification">
-                            <div class="cert-image">
-                                [Certification 2 Image]
-                            </div>
-                            <p>Certification Name - Issuing Organization (Year)</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- ===== Contact Section ===== -->
-            <section id="contact">
-                <h2 class="section-title">Contact Me</h2>
-                <div class="contact-links">
-                    <a href="https://github.com/jin-56" class="contact-link" target="_blank">
-                        <i class="fab fa-github"></i> GitHub
-                    </a>
-                    <a href="#" class="contact-link" target="_blank">
-                        <i class="fab fa-linkedin"></i> LinkedIn
-                    </a>
-                    <a href="#" class="contact-link" target="_blank">
-                        <i class="fab fa-instagram"></i> Instagram
-                    </a>
-                    <a href="mailto:your-email@example.com" class="contact-link">
-                        <i class="fas fa-envelope"></i> Email
-                    </a>
-                </div>
-            </section>
-        </main>
+    <!-- ===== Fixed Right Side Terminal ===== -->
+    <div class="terminal-container">
+        <div class="terminal-box">
+            <div class="terminal-header">
+                <div class="terminal-dot dot-red"></div>
+                <div class="terminal-dot dot-yellow"></div>
+                <div class="terminal-dot dot-green"></div>
+            </div>
+            <div class="terminal-content" id="terminal-text">
+                <!-- Text will be typed here by JavaScript -->
+            </div>
+        </div>
     </div>
+
+    <!-- ===== Main Content ===== -->
+    <main class="main-content">
+        <!-- ===== About Section ===== -->
+        <section id="about">
+            <div class="about-content">
+                <h2 class="section-title">About Me</h2>
+                <p style="margin-bottom: 20px;">I'm a passionate developer with expertise in multiple technologies.</p>
+                <p>Scroll down to see my projects and skills.</p>
+            </div>
+        </section>
+
+        <!-- ===== Projects Section ===== -->
+        <section id="projects">
+            <h2 class="section-title">My Projects</h2>
+            <div class="projects-grid">
+                <!-- Project 1 -->
+                <div class="project-card">
+                    <div class="project-image">
+                        [Project 1 Image]
+                    </div>
+                    <div class="project-info">
+                        <h3 class="project-title">Project 1</h3>
+                        <p>Description of project 1 goes here. Explain what it does and technologies used.</p>
+                        <div class="project-links">
+                            <a href="#" target="_blank"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                            <a href="#" target="_blank"><i class="fab fa-github"></i> Source Code</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="project-card">
+                    <div class="project-image">
+                        [Project 2 Image]
+                    </div>
+                    <div class="project-info">
+                        <h3 class="project-title">Project 2</h3>
+                        <p>Description of project 2 goes here. Explain what it does and technologies used.</p>
+                        <div class="project-links">
+                            <a href="#" target="_blank"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                            <a href="#" target="_blank"><i class="fab fa-github"></i> Source Code</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Add more projects as needed -->
+            </div>
+        </section>
+
+        <!-- ===== Skills & Certifications Section ===== -->
+        <section id="skills">
+            <h2 class="section-title">Skills & Certifications</h2>
+            <div class="skills-container">
+                <!-- Skills Column -->
+                <div class="skill-card">
+                    <h3 class="skill-title">Technical Skills</h3>
+                    <ul>
+                        <li>JavaScript/TypeScript</li>
+                        <li>Python</li>
+                        <li>React.js</li>
+                        <li>Node.js</li>
+                        <li>HTML/CSS</li>
+                        <li>Git/GitHub</li>
+                    </ul>
+                </div>
+                
+                <!-- Certifications Column -->
+                <div class="skill-card">
+                    <h3 class="skill-title">Certifications</h3>
+                    <div class="certification">
+                        <div class="cert-image">
+                            [Certification 1 Image]
+                        </div>
+                        <p>Certification Name - Issuing Organization (Year)</p>
+                    </div>
+                    <div class="certification">
+                        <div class="cert-image">
+                            [Certification 2 Image]
+                        </div>
+                        <p>Certification Name - Issuing Organization (Year)</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== Contact Section ===== -->
+        <section id="contact">
+            <h2 class="section-title">Contact Me</h2>
+            <div class="contact-links">
+                <a href="https://github.com/jin-56" class="contact-link" target="_blank">
+                    <i class="fab fa-github"></i> GitHub
+                </a>
+                <a href="#" class="contact-link" target="_blank">
+                    <i class="fab fa-linkedin"></i> LinkedIn
+                </a>
+                <a href="#" class="contact-link" target="_blank">
+                    <i class="fab fa-instagram"></i> Instagram
+                </a>
+                <a href="mailto:your-email@example.com" class="contact-link">
+                    <i class="fas fa-envelope"></i> Email
+                </a>
+            </div>
+        </section>
+    </main>
 
     <!-- ===== JavaScript ===== -->
     <script>
@@ -455,7 +470,9 @@
             const terminal = document.getElementById('terminal-text');
             const messages = [
                 "Hello my name is Rojin Maharjan",
-                "Welcome to my portfolio"
+                "Welcome to my portfolio",
+                "I'm a passionate developer",
+                "Scroll to explore my work"
             ];
             let messageIndex = 0;
             let charIndex = 0;
