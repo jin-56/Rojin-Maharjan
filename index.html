@@ -26,6 +26,7 @@
             min-height: 100vh;
             background-color: var(--bg-dark);
             color: var(--text-light);
+            overflow-x: hidden;
         }
 
         /* Sidebar */
@@ -36,6 +37,7 @@
             position: fixed;
             height: 100vh;
             border-right: 1px solid #333;
+            overflow-y: auto;
         }
 
         .logo {
@@ -74,6 +76,17 @@
             margin-left: 250px;
             flex: 1;
             padding: 2rem;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        /* Sections */
+        .section {
+            min-height: 100vh;
+            padding: 2rem 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
         /* Terminal Box */
@@ -128,15 +141,6 @@
         }
 
         /* Sections */
-        section {
-            display: none;
-            animation: fadeIn 0.5s ease;
-        }
-
-        section.active {
-            display: block;
-        }
-
         .section-title {
             color: var(--primary);
             margin-bottom: 1.5rem;
@@ -313,25 +317,35 @@
                 height: auto;
                 position: relative;
                 padding: 1rem;
+                border-right: none;
+                border-bottom: 1px solid #333;
             }
             .main-content {
                 margin-left: 0;
+                height: auto;
             }
             .nav-links {
                 display: flex;
                 overflow-x: auto;
                 gap: 1rem;
+                padding-bottom: 1rem;
             }
             .nav-links li {
                 margin-bottom: 0;
+                flex-shrink: 0;
             }
             .nav-links a {
                 border-left: none;
                 border-bottom: 3px solid transparent;
+                white-space: nowrap;
             }
             .nav-links a:hover, .nav-links a.active {
                 border-left: none;
                 border-bottom: 3px solid var(--primary);
+            }
+            .section {
+                min-height: auto;
+                padding: 3rem 0;
             }
         }
     </style>
@@ -351,26 +365,25 @@
 
     <!-- Main Content -->
     <main class="main-content">
-        <!-- Terminal Box -->
-        <div class="terminal">
-            <div class="terminal-header">
-                <div class="terminal-dots">
-                    <div class="dot dot-red"></div>
-                    <div class="dot dot-yellow"></div>
-                    <div class="dot dot-green"></div>
-                </div>
-                <div class="terminal-title">bash</div>
-            </div>
-            <div class="terminal-body">
-                <div class="command">$ whoami</div>
-                <div class="output">Rojin Maharjan</div>
-                <div class="command">$ echo "Welcome to my profile"</div>
-                <div class="output">Welcome to my profile</div>
-            </div>
-        </div>
-
         <!-- Education Section -->
-        <section id="education" class="active">
+        <section id="education" class="section">
+            <div class="terminal">
+                <div class="terminal-header">
+                    <div class="terminal-dots">
+                        <div class="dot dot-red"></div>
+                        <div class="dot dot-yellow"></div>
+                        <div class="dot dot-green"></div>
+                    </div>
+                    <div class="terminal-title">bash</div>
+                </div>
+                <div class="terminal-body">
+                    <div class="command">$ whoami</div>
+                    <div class="output">Rojin Maharjan</div>
+                    <div class="command">$ echo "Welcome to my profile"</div>
+                    <div class="output">Welcome to my profile</div>
+                </div>
+            </div>
+            
             <h2 class="section-title">Education</h2>
             <div class="education-item">
                 <h3>Bachelor's Degree in Computer Science</h3>
@@ -385,7 +398,7 @@
         </section>
 
         <!-- Skills Section -->
-        <section id="skills">
+        <section id="skills" class="section">
             <h2 class="section-title">Skills</h2>
             <div class="skills-container">
                 <div class="skill-card">
@@ -400,7 +413,6 @@
                     <h3>Git</h3>
                     <p>Version control and collaboration</p>
                 </div>
-                <!-- Add more skills as needed -->
                 <div class="skill-card">
                     <h3>Web Development</h3>
                     <p>HTML, CSS, JavaScript</p>
@@ -409,11 +421,15 @@
                     <h3>Database</h3>
                     <p>SQL, MongoDB</p>
                 </div>
+                <div class="skill-card">
+                    <h3>Linux</h3>
+                    <p>System administration and scripting</p>
+                </div>
             </div>
         </section>
 
         <!-- Projects Section -->
-        <section id="projects">
+        <section id="projects" class="section">
             <h2 class="section-title">Projects</h2>
             <div class="projects-container">
                 <div class="project-card">
@@ -432,29 +448,42 @@
                         <a href="#" target="_blank"><i class="fab fa-github"></i> Source Code</a>
                     </div>
                 </div>
-                <!-- Add more projects as needed -->
+                <div class="project-card">
+                    <h3>Project Name 3</h3>
+                    <p>Brief description of what the project does and technologies used.</p>
+                    <div class="project-links">
+                        <a href="#" target="_blank"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                        <a href="#" target="_blank"><i class="fab fa-github"></i> Source Code</a>
+                    </div>
+                </div>
             </div>
         </section>
 
         <!-- Certifications Section -->
-        <section id="certifications">
+        <section id="certifications" class="section">
             <h2 class="section-title">Certifications</h2>
             <div class="certifications-container">
-                <div class="cert-card" onclick="openModal('cert1.jpg', 'Python Certification')">
+                <div class="cert-card" onclick="openModal('https://via.placeholder.com/800x600', 'Python Certification')">
                     <img src="https://via.placeholder.com/300x200" alt="Certification 1" class="cert-img">
                     <div class="cert-info">
                         <h3>Python Certification</h3>
                         <p>Issued by ABC Organization</p>
                     </div>
                 </div>
-                <div class="cert-card" onclick="openModal('cert2.jpg', 'Web Development Certification')">
+                <div class="cert-card" onclick="openModal('https://via.placeholder.com/800x600', 'Web Development Certification')">
                     <img src="https://via.placeholder.com/300x200" alt="Certification 2" class="cert-img">
                     <div class="cert-info">
                         <h3>Web Development</h3>
                         <p>Issued by XYZ Academy</p>
                     </div>
                 </div>
-                <!-- Add more certifications as needed -->
+                <div class="cert-card" onclick="openModal('https://via.placeholder.com/800x600', 'Data Science Certification')">
+                    <img src="https://via.placeholder.com/300x200" alt="Certification 3" class="cert-img">
+                    <div class="cert-info">
+                        <h3>Data Science</h3>
+                        <p>Issued by DEF Institute</p>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -469,7 +498,7 @@
         </div>
 
         <!-- Contact Section -->
-        <section id="contact">
+        <section id="contact" class="section">
             <h2 class="section-title">Contact</h2>
             <div class="contact-links">
                 <a href="https://linkedin.com/in/yourprofile" target="_blank" class="contact-link">
@@ -484,35 +513,14 @@
                 <a href="mailto:your.email@example.com" class="contact-link">
                     <i class="fas fa-envelope"></i> Email
                 </a>
+                <a href="your-resume.pdf" download class="contact-link">
+                    <i class="fas fa-file-download"></i> Resume
+                </a>
             </div>
         </section>
     </main>
 
     <script>
-        // Navigation
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                // Remove active class from all links
-                document.querySelectorAll('.nav-links a').forEach(item => {
-                    item.classList.remove('active');
-                });
-                
-                // Add active class to clicked link
-                this.classList.add('active');
-                
-                // Hide all sections
-                document.querySelectorAll('section').forEach(section => {
-                    section.classList.remove('active');
-                });
-                
-                // Show clicked section
-                const target = this.getAttribute('href');
-                document.querySelector(target).classList.add('active');
-            });
-        });
-
         // Modal functionality
         function openModal(imgSrc, title) {
             const modal = document.getElementById('certModal');
@@ -522,10 +530,12 @@
             modal.style.display = 'block';
             modalImg.src = imgSrc;
             modalTitle.textContent = title;
+            document.body.style.overflow = 'hidden';
         }
 
         function closeModal() {
             document.getElementById('certModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
         }
 
         // Close modal when clicking outside
@@ -536,8 +546,51 @@
             }
         }
 
-        // Default to education section
-        document.querySelector('#education').classList.add('active');
+        // Smooth scrolling for navigation
+        document.querySelectorAll('.nav-links a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Remove active class from all links
+                document.querySelectorAll('.nav-links a').forEach(item => {
+                    item.classList.remove('active');
+                });
+                
+                // Add active class to clicked link
+                this.classList.add('active');
+                
+                // Scroll to section
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                if (targetSection) {
+                    window.scrollTo({
+                        top: targetSection.offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Highlight active section while scrolling
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('.section');
+            const scrollPosition = window.scrollY + 100;
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.offsetHeight;
+                const sectionId = section.getAttribute('id');
+                
+                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                    document.querySelectorAll('.nav-links a').forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === `#${sectionId}`) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        });
     </script>
 </body>
 </html>
